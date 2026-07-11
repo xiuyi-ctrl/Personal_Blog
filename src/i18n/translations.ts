@@ -17,19 +17,17 @@ export const translations = {
       cta: "联系我",
     },
     experience: {
-      title: "About",
-      subtitle: "A brief look into my journey",
-      intro1:
-        "我是咻咿，热衷于利用 AI 辅助编程工具，将创意快速转化为可用的产品。我相信 AI 正在改变软件开发的方式，让更多人能够实现自己的想法。",
-      intro2:
-        "从待办清单到记账工具，再到个人信息保险箱，我享受用代码解决实际问题的过程。每个项目都是一次学习和成长的机会。",
-      contactLabel: "Let's Connect",
+      title: "PROFILE",
+      subtitle: "个人经历",
+      heading: "Vibe Coding 爱好者，擅长用 AI 工具将创意快速转化为可用的产品。",
+      intro:
+        "拥有丰富的编程经验，热衷于利用AI辅助编程，开发创意产品，解决实际问题，每个项目都是一次学习和成长的机会。",
       email: "2998526825@qq.com",
-      location: "中国",
       stats: [
-        { value: "3", label: "Projects Built" },
-        { value: "3", label: "AI Tools Used" },
-        { value: "∞", label: "Ideas" },
+        { value: "3+", label: "已完成项目" },
+        { value: "1年+", label: "学习时长" },
+        { value: "∞", label: "创意想法" },
+        { value: "100%", label: "学习热情" },
       ],
     },
     projects: {
@@ -90,19 +88,17 @@ export const translations = {
       cta: "联系我",
     },
     experience: {
-      title: "个人经历",
-      subtitle: "一段旅程，无数可能",
-      intro1:
-        "我是咻咿，热衷于利用 AI 辅助编程工具，将创意快速转化为可用的产品。我相信 AI 正在改变软件开发的方式，让更多人能够实现自己的想法。",
-      intro2:
-        "从待办清单到记账工具，再到个人信息保险箱，我享受用代码解决实际问题的过程。每个项目都是一次学习和成长的机会。",
-      contactLabel: "联系我",
+      title: "PROFILE",
+      subtitle: "个人经历",
+      heading: "Vibe Coding 爱好者，擅长用 AI 工具将创意快速转化为可用的产品。",
+      intro:
+        "拥有丰富的编程经验，热衷于利用AI辅助编程，开发创意产品，解决实际问题，每个项目都是一次学习和成长的机会。",
       email: "2998526825@qq.com",
-      location: "中国",
       stats: [
-        { value: "3", label: "已完成项目" },
-        { value: "3", label: "使用AI工具" },
-        { value: "∞", label: "创意想法" },
+        { value: "3+", label: "已完成项目" },
+        { value: "1年+", label: "学习时长" },
+        { value: "", label: "创意想法" },
+        { value: "100%", label: "学习热情" },
       ],
     },
     projects: {
