@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { BloomEffect, EffectComposer, EffectPass, RenderPass, SMAAEffect, SMAAPreset } from 'postprocessing';
+import { BloomEffect, EffectComposer, EffectPass, RenderPass } from 'postprocessing';
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
@@ -362,7 +362,7 @@ const Hyperspeed = ({ effectOptions = DEFAULT_EFFECT_OPTIONS }) => {
           alpha: true
         });
         this.renderer.setSize(initW, initH, false);
-        this.renderer.setPixelRatio(window.devicePixelRatio);
+        this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         this.composer = new EffectComposer(this.renderer);
         container.append(this.renderer.domElement);
 
@@ -382,6 +382,9 @@ const Hyperspeed = ({ effectOptions = DEFAULT_EFFECT_OPTIONS }) => {
         };
         this.clock = new THREE.Clock();
         this.assets = {};
+        this.lookTarget = new THREE.Vector3();
+        this.lastFrameTime = 0;
+        this.frameInterval = 1000 / 60;
         this.disposed = false;
 
         this.road = new Road(this, options);
@@ -447,49 +450,13 @@ const Hyperspeed = ({ effectOptions = DEFAULT_EFFECT_OPTIONS }) => {
           new BloomEffect({
             luminanceThreshold: 0.2,
             luminanceSmoothing: 0,
-            resolutionScale: 1
-          })
-        );
-
-        const smaaPass = new EffectPass(
-          this.camera,
-          new SMAAEffect({
-            preset: SMAAPreset.MEDIUM,
-            searchImage: SMAAEffect.searchImageDataURL,
-            areaImage: SMAAEffect.areaImageDataURL
+            resolutionScale: 0.35
           })
         );
         this.renderPass.renderToScreen = false;
-        this.bloomPass.renderToScreen = false;
-        smaaPass.renderToScreen = true;
+        this.bloomPass.renderToScreen = true;
         this.composer.addPass(this.renderPass);
         this.composer.addPass(this.bloomPass);
-        this.composer.addPass(smaaPass);
-      }
-
-      loadAssets() {
-        const assets = this.assets;
-        return new Promise(resolve => {
-          const manager = new THREE.LoadingManager(resolve);
-
-          const searchImage = new Image();
-          const areaImage = new Image();
-          assets.smaa = {};
-          searchImage.addEventListener('load', function () {
-            assets.smaa.search = this;
-            manager.itemEnd('smaa-search');
-          });
-
-          areaImage.addEventListener('load', function () {
-            assets.smaa.area = this;
-            manager.itemEnd('smaa-area');
-          });
-          manager.itemStart('smaa-search');
-          manager.itemStart('smaa-area');
-
-          searchImage.src = SMAAEffect.searchImageDataURL;
-          areaImage.src = SMAAEffect.areaImageDataURL;
-        });
       }
 
       init() {
@@ -567,13 +534,12 @@ const Hyperspeed = ({ effectOptions = DEFAULT_EFFECT_OPTIONS }) => {
         if (this.options.distortion.getJS) {
           const distortion = this.options.distortion.getJS(0.025, time);
 
-          this.camera.lookAt(
-            new THREE.Vector3(
-              this.camera.position.x + distortion.x,
-              this.camera.position.y + distortion.y,
-              this.camera.position.z + distortion.z
-            )
+          this.lookTarget.set(
+            this.camera.position.x + distortion.x,
+            this.camera.position.y + distortion.y,
+            this.camera.position.z + distortion.z
           );
+          this.camera.lookAt(this.lookTarget);
           updateCamera = true;
         }
         if (updateCamera) {
@@ -652,7 +618,7 @@ const Hyperspeed = ({ effectOptions = DEFAULT_EFFECT_OPTIONS }) => {
             this.composer.setSize(w, h);
             this.hasValidSize = true;
           } else {
-            requestAnimationFrame(this.tick);
+            requestAnimationFrame(() => this.tick());
             return;
           }
         }
@@ -667,11 +633,16 @@ const Hyperspeed = ({ effectOptions = DEFAULT_EFFECT_OPTIONS }) => {
 
         if (this.hasValidSize) {
           const delta = this.clock.getDelta();
-          this.render(delta);
-          this.update(delta);
+          const now = performance.now();
+          const elapsed = now - this.lastFrameTime;
+          if (elapsed >= this.frameInterval) {
+            this.lastFrameTime = now - (elapsed % this.frameInterval);
+            this.render(delta);
+            this.update(delta);
+          }
         }
 
-        requestAnimationFrame(this.tick);
+        requestAnimationFrame(() => this.tick());
       }
     }
 
@@ -1168,7 +1139,7 @@ const Hyperspeed = ({ effectOptions = DEFAULT_EFFECT_OPTIONS }) => {
 
     const myApp = new App(container, options);
     appRef.current = myApp;
-    myApp.loadAssets().then(myApp.init);
+    myApp.init();
 
     return () => {
       if (appRef.current) {
