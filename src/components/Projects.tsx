@@ -1,0 +1,62 @@
+import { projects } from "../data/projects";
+import { useLanguage } from "../i18n/LanguageContext";
+
+function Projects() {
+  const { t } = useLanguage();
+
+  return (
+    <section id="projects" className="py-32">
+      <div className="max-w-[1700px] mx-auto px-8">
+        <div className="text-center mb-20">
+          <span className="text-xs text-white/30 tracking-[0.3em] uppercase">
+            {t.projects.title}
+          </span>
+          <h2 className="text-4xl md:text-5xl font-bold mt-4 text-white/90">
+            {t.projects.subtitle}
+          </h2>
+        </div>
+
+        <div className="space-y-12">
+          {projects.map((project, index) => (
+            <div
+              key={project.id}
+              className="group relative grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center border-t border-white/[0.04] pt-12"
+            >
+              <div className={`${index % 2 === 1 ? 'lg:order-2' : ''}`}>
+                <div className="aspect-[16/10] overflow-hidden bg-white/[0.02] border border-white/[0.06]">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+              <div className={`${index % 2 === 1 ? 'lg:order-1' : ''}`}>
+                <span className="text-[10px] text-white/20 tracking-[0.3em] uppercase">
+                  {String(project.id).padStart(2, "0")}
+                </span>
+                <h3 className="text-2xl font-bold text-white/90 mt-2">{project.title}</h3>
+                <p className="text-sm text-white/40 mt-4 leading-relaxed">
+                  {project.description}
+                </p>
+                <div className="flex flex-wrap gap-2 mt-6">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-3 py-1 text-[11px] text-white/30 border border-white/[0.08] tracking-wide"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default Projects;
