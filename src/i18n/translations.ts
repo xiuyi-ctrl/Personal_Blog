@@ -11,10 +11,11 @@ export const translations = {
     },
     hero: {
       greeting: "Welcome to",
-      highlight: "Xiuyi's Portfolio",
+      greetingXiuyi: "Xiuyi",
+      highlight: "Portfolio",
       subtitle:
-        "你好，这里是咻咿个人作品集。用 AI 辅助编程，将创意快速转化为可用的产品。",
-      cta: "联系我",
+        "Hello, I'm Xiaoyi personal portfolio. Use AI-assisted programming to quickly transform ideas into usable products.",
+      cta: "Contact",
     },
     experience: {
       title: "PROFILE",
@@ -82,7 +83,8 @@ export const translations = {
     },
     hero: {
       greeting: "你好，这里是",
-      highlight: "咻咿个人作品集",
+      greetingXiuyi: "咻咿",
+      highlight: "个人作品集",
       subtitle:
         "用 AI 辅助编程，将创意快速转化为可用的产品。热爱探索新技术，享受从零到一的创造过程。",
       cta: "联系我",
