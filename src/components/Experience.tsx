@@ -1,5 +1,6 @@
 import { useLanguage } from "../i18n/LanguageContext";
 import BorderGlow from "./BorderGlow";
+import CountUp from "./CountUp";
 
 function Experience() {
   const { t } = useLanguage();
@@ -69,10 +70,10 @@ function Experience() {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {t.experience.stats.map((stat) => (
+          {t.experience.stats.map((stat, index) => (
             <BorderGlow key={stat.label} colors={['#c084fc', '#f472b6', '#38bdf8']} animated={false}>
               <div className="p-6">
-                <p className="text-3xl md:text-4xl font-bold text-white/90">{stat.value}</p>
+                <CountUp value={stat.value} delay={index * 100} className="text-3xl md:text-4xl font-bold text-white/90" />
                 <p className="text-xs text-white/40 mt-2 tracking-wide">{stat.label}</p>
               </div>
             </BorderGlow>
