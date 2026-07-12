@@ -5,6 +5,7 @@ import Experience from "./components/Experience";
 import Projects from "./components/Projects";
 import Strengths from "./components/Strengths";
 import Contact from "./components/Contact";
+import LogoLoop from "./components/LogoLoop";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Strengths />
           <Contact />
         </main>
+        <LogoLoop />
       </div>
     </LanguageProvider>
   );
