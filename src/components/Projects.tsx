@@ -7,7 +7,7 @@ function Projects() {
 
   return (
     <section id="projects" className="py-32 relative">
-      <Particles particleCount={40} particleSpread={6} speed={0.04} particleColors={['#38bdf8', '#c084fc']} particleBaseSize={20} sizeRandomness={0.4} cameraDistance={12} />
+      <Particles particleCount={120} particleSpread={12} speed={0.06} particleColors={['#38bdf8', '#c084fc', '#a855f7', '#0ea5e9']} particleBaseSize={50} sizeRandomness={0.7} cameraDistance={16} particleHoverFactor={1.3} />
       <div className="max-w-[1700px] mx-auto px-8 relative z-10">
         <div className="text-center mb-20">
           <span className="text-xs text-white/30 tracking-[0.3em] uppercase">

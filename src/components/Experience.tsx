@@ -9,7 +9,7 @@ function Experience() {
 
   return (
     <section id="experience" className="py-32 relative">
-      <Particles particleCount={60} particleSpread={8} speed={0.05} particleColors={['#c084fc', '#f472b6', '#38bdf8']} particleBaseSize={30} sizeRandomness={0.5} cameraDistance={15} />
+      <Particles particleCount={180} particleSpread={18} speed={0.08} particleColors={['#c084fc', '#f472b6', '#38bdf8', '#a855f7', '#ec4899', '#0ea5e9']} particleBaseSize={70} sizeRandomness={0.8} cameraDistance={22} particleHoverFactor={1.5} />
       <div className="max-w-[1700px] mx-auto px-8 relative z-10">
         <div className="mb-16">
           <h2 className="text-6xl md:text-7xl font-extrabold text-white/90 leading-none tracking-tight">

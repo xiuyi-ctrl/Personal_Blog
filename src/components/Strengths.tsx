@@ -31,13 +31,14 @@ function Strengths() {
   return (
     <section id="strengths" className="py-32 relative">
       <Particles
-        particleCount={60}
-        particleSpread={8}
-        speed={0.08}
-        particleColors={['#c084fc', '#f472b6', '#38bdf8']}
-        particleBaseSize={25}
-        sizeRandomness={0.5}
-        cameraDistance={15}
+        particleCount={160}
+        particleSpread={16}
+        speed={0.1}
+        particleColors={['#c084fc', '#f472b6', '#38bdf8', '#a855f7', '#ec4899', '#0ea5e9']}
+        particleBaseSize={55}
+        sizeRandomness={0.9}
+        cameraDistance={20}
+        particleHoverFactor={1.5}
       />
       <div className="max-w-[1700px] mx-auto px-8 relative z-10">
         <div className="text-center mb-20">

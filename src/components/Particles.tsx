@@ -71,17 +71,28 @@ const fragment = /* glsl */ `
   
   void main() {
     vec2 uv = gl_PointCoord.xy;
-    float d = length(uv - vec2(0.5));
+    vec2 center = vec2(0.5);
+    float d = length(uv - center);
     
-    if(uAlphaParticles < 0.5) {
-      if(d > 0.5) {
-        discard;
-      }
-      gl_FragColor = vec4(vColor + 0.2 * sin(uv.yxx + uTime + vRandom.y * 6.28), 1.0);
-    } else {
-      float circle = smoothstep(0.5, 0.4, d) * 0.8;
-      gl_FragColor = vec4(vColor + 0.2 * sin(uv.yxx + uTime + vRandom.y * 6.28), circle);
-    }
+    // Core glow - bright center
+    float core = smoothstep(0.35, 0.0, d);
+    
+    // Outer glow/halo
+    float halo = smoothstep(0.5, 0.35, d) * 0.6;
+    
+    // Outer edge fade
+    float edge = smoothstep(0.5, 0.48, d);
+    
+    float alpha = (core + halo) * edge;
+    
+    // Pulsing glow intensity
+    float pulse = 0.8 + 0.2 * sin(uTime * 2.0 + vRandom.x * 6.28);
+    alpha *= pulse;
+    
+    // Color with subtle animation
+    vec3 finalColor = vColor + 0.15 * sin(uv.yxx + uTime * 1.5 + vRandom.y * 6.28);
+    
+    gl_FragColor = vec4(finalColor * (1.0 + core * 0.5), alpha);
   }
 `;
 
@@ -102,16 +113,16 @@ interface ParticlesProps {
 }
 
 const Particles = ({
-  particleCount = 80,
-  particleSpread = 10,
-  speed = 0.1,
-  particleColors = ['#c084fc'],
+  particleCount = 160,
+  particleSpread = 14,
+  speed = 0.12,
+  particleColors = ['#c084fc', '#f472b6', '#38bdf8'],
   moveParticlesOnHover = true,
-  particleHoverFactor = 1,
+  particleHoverFactor = 1.2,
   alphaParticles = false,
-  particleBaseSize = 60,
-  sizeRandomness = 1,
-  cameraDistance = 20,
+  particleBaseSize = 80,
+  sizeRandomness = 1.2,
+  cameraDistance = 18,
   disableRotation = false,
   pixelRatio = 1,
   className = '',
@@ -132,7 +143,7 @@ const Particles = ({
     container.appendChild(gl.canvas);
     gl.clearColor(0, 0, 0, 0);
 
-    const camera = new Camera(gl, { fov: 15 });
+    const camera = new Camera(gl, { fov: 18 });
     camera.position.set(0, 0, cameraDistance);
 
     const resize = () => {

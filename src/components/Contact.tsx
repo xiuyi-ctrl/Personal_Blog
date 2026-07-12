@@ -7,13 +7,14 @@ function Contact() {
   return (
     <section id="contact" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <Particles
-        particleCount={100}
-        particleSpread={15}
-        speed={0.06}
-        particleColors={['#c084fc', '#f472b6', '#38bdf8']}
-        particleBaseSize={30}
-        sizeRandomness={0.6}
+        particleCount={200}
+        particleSpread={20}
+        speed={0.1}
+        particleColors={['#c084fc', '#f472b6', '#38bdf8', '#a855f7', '#ec4899', '#0ea5e9', '#ffffff']}
+        particleBaseSize={80}
+        sizeRandomness={1}
         cameraDistance={25}
+        particleHoverFactor={1.8}
       />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_rgba(120,80,255,0.06)_0%,_transparent_60%)]" />
 
