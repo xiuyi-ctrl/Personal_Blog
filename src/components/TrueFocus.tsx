@@ -18,7 +18,7 @@ const TrueFocus = ({
   sentence = 'True Focus',
   separator = ' ',
   manualMode = false,
-  blurAmount = 5,
+  blurAmount = 2,
   borderColor = '#c084fc',
   glowColor = 'rgba(192, 132, 252, 0.6)',
   animationDuration = 0.6,
@@ -27,40 +27,53 @@ const TrueFocus = ({
   const words = sentence.split(separator);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [lastActiveIndex, setLastActiveIndex] = useState<number | null>(null);
+  const [showAllClear, setShowAllClear] = useState(false);
+  const [cycleCount, setCycleCount] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const wordRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const [focusRect, setFocusRect] = useState({ x: 0, y: 0, width: 0, height: 0 });
 
   useEffect(() => {
-    if (!manualMode) {
+    if (!manualMode && !showAllClear) {
       const interval = setInterval(
         () => {
-          setCurrentIndex((prev) => (prev + 1) % words.length);
+          setCurrentIndex((prev) => {
+            const next = prev + 1;
+            if (next >= words.length) {
+              setCycleCount((c) => c + 1);
+            }
+            return next % words.length;
+          });
         },
         (animationDuration + pauseBetweenAnimations) * 1000
       );
 
       return () => clearInterval(interval);
     }
-  }, [manualMode, animationDuration, pauseBetweenAnimations, words.length]);
+  }, [manualMode, animationDuration, pauseBetweenAnimations, words.length, showAllClear]);
 
   useEffect(() => {
-    if (currentIndex === null || currentIndex === -1) return;
+    if (cycleCount >= 1 && !showAllClear) {
+      setShowAllClear(true);
+    }
+  }, [cycleCount, showAllClear]);
+
+  useEffect(() => {
+    if (currentIndex === null || currentIndex === -1 || showAllClear) return;
 
     if (!wordRefs.current[currentIndex] || !containerRef.current) return;
 
-    const parentRect = containerRef.current.getBoundingClientRect();
     const activeRect = wordRefs.current[currentIndex]?.getBoundingClientRect();
 
     if (!activeRect) return;
 
     setFocusRect({
-      x: activeRect.left - parentRect.left,
-      y: activeRect.top - parentRect.top,
+      x: activeRect.left - containerRef.current.getBoundingClientRect().left,
+      y: activeRect.top - containerRef.current.getBoundingClientRect().top,
       width: activeRect.width,
       height: activeRect.height,
     });
-  }, [currentIndex, words.length]);
+  }, [currentIndex, words.length, showAllClear]);
 
   const handleMouseEnter = (index: number) => {
     if (manualMode) {
@@ -86,14 +99,8 @@ const TrueFocus = ({
               wordRefs.current[index] = el;
             }}
             className={`focus-word ${manualMode ? 'manual' : ''} ${isActive && !manualMode ? 'active' : ''}`}
-style={{
-              filter: manualMode
-                ? isActive
-                  ? `blur(0px)`
-                  : `blur(${blurAmount}px)`
-                : isActive
-                  ? `blur(0px)`
-                  : `blur(${blurAmount}px)`,
+            style={{
+              filter: showAllClear ? `blur(0px)` : (isActive ? `blur(0px)` : `blur(${blurAmount}px)`),
               '--border-color': borderColor,
               '--glow-color': glowColor,
               transition: `filter ${animationDuration}s ease`
@@ -113,7 +120,7 @@ style={{
           y: focusRect.y,
           width: focusRect.width,
           height: focusRect.height,
-          opacity: currentIndex >= 0 ? 1 : 0
+          opacity: showAllClear || currentIndex < 0 ? 0 : 1
         }}
         transition={{
           duration: animationDuration
