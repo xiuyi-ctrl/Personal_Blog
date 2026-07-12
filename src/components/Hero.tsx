@@ -37,12 +37,12 @@ const hyperspeedOptions: any = {
     rightCars: [242627, 941733, 3294549],
     sticks: 242627,
   },
-};
+}
 
 const rotatingTexts = [
   "个人作品集",
   "Vibe Coding"
-];;
+];
 
 function Hero() {
   const { t, lang } = useLanguage();
