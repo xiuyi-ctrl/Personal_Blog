@@ -29,6 +29,19 @@ export const translations = {
       { value: "∞", label: "创意想法" },
       { value: "100%", label: "学习热情" },
     ],
+    techHobbies: [
+      "Vibe Coding",
+      "AIGC",
+      "Codex",
+      "OpenCode",
+      "Python",
+      "Java",
+      "游戏",
+      "机器学习",
+      "NLP",
+      "深度学习",
+      "大模型"
+    ],
   },
   projects: {
     title: "精选项目",

@@ -1,6 +1,7 @@
 import { useLanguage } from "../i18n/LanguageContext";
 import BorderGlow from "./BorderGlow";
 import CountUp from "./CountUp";
+import TechTag from "./TechTag";
 
 function Experience() {
   const { t } = useLanguage();
@@ -78,6 +79,19 @@ function Experience() {
               </div>
             </BorderGlow>
           ))}
+        </div>
+
+        <div className="mt-16">
+          <h3 className="text-sm font-semibold text-white/60 tracking-wider uppercase mb-6">
+            技术与爱好
+          </h3>
+          <div className="flex flex-wrap justify-between gap-3">
+            {t.experience.techHobbies.map((tag, index) => (
+              <TechTag key={index} className="bg-white/[0.03] border border-white/[0.06] flex-1 min-w-[80px] text-center">
+                {tag}
+              </TechTag>
+            ))}
+          </div>
         </div>
       </div>
     </section>
