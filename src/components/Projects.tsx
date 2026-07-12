@@ -2,7 +2,7 @@ import { projects } from "../data/projects";
 import { useLanguage } from "../i18n/LanguageContext";
 
 function Projects() {
-  const { t, lang } = useLanguage();
+  const { t } = useLanguage();
 
   return (
     <section id="projects" className="py-32">
@@ -40,7 +40,7 @@ function Projects() {
                 </span>
                 <h3 className="text-2xl font-bold text-white/90 mt-2">{project.title}</h3>
                 <p className="text-sm text-white/40 mt-4 leading-relaxed">
-                  {lang === "en" ? project.description : project.descriptionZh}
+                  {project.descriptionZh}
                 </p>
                 <div className="flex flex-wrap gap-2 mt-6">
                   {project.tags.map((tag) => (
@@ -59,7 +59,7 @@ function Projects() {
                     rel="noopener noreferrer"
                     className="inline-block mt-6 text-sm text-white/50 hover:text-white transition-colors tracking-wide"
                   >
-                    {lang === "en" ? "View Project →" : "查看项目 →"}
+                    查看项目 →
                   </a>
                 )}
               </div>

@@ -2,7 +2,7 @@ import { useLanguage } from "../i18n/LanguageContext";
 import BorderGlow from "./BorderGlow";
 
 function Experience() {
-  const { t, lang } = useLanguage();
+  const { t } = useLanguage();
 
   return (
     <section id="experience" className="py-32">
@@ -28,7 +28,7 @@ function Experience() {
                   </svg>
                 </div>
                 <p className="text-xl font-semibold text-white/80">
-                  {lang === "en" ? "Xiuyi" : "咻咿"}
+                  咻咿
                 </p>
               </div>
             </div>

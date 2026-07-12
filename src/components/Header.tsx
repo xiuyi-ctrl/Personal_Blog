@@ -1,7 +1,7 @@
 import { useLanguage } from "../i18n/LanguageContext";
 
 function Header() {
-  const { t, lang, setLang } = useLanguage();
+  const { t } = useLanguage();
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-[#0a0a0a]/70 backdrop-blur-lg border-b border-white/[0.03]">
@@ -24,20 +24,12 @@ function Header() {
             ))}
           </ul>
 
-          <div className="flex items-center gap-4">
-            <button
-              onClick={() => setLang(lang === "en" ? "zh" : "en")}
-              className="text-xs text-white/40 hover:text-white/70 transition-colors tracking-widest"
-            >
-              {lang === "en" ? "中文" : "EN"}
-            </button>
-            <a
-              href="#contact"
-              className="px-5 py-2 text-sm border border-white/20 text-white/80 hover:bg-white hover:text-black transition-all duration-300 rounded-none tracking-wide"
-            >
-              {t.nav.contactBtn}
-            </a>
-          </div>
+          <a
+            href="#contact"
+            className="px-5 py-2 text-sm border border-white/20 text-white/80 hover:bg-white hover:text-black transition-all duration-300 rounded-none tracking-wide"
+          >
+            {t.nav.contactBtn}
+          </a>
         </div>
       </div>
     </header>

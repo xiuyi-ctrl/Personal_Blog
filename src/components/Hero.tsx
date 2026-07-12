@@ -45,7 +45,7 @@ const rotatingTexts = [
 ];
 
 function Hero() {
-  const { t, lang } = useLanguage();
+  const { t } = useLanguage();
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -57,7 +57,7 @@ function Hero() {
         <div className="mb-6 inline-flex items-center gap-2 px-4 py-2 border border-white/10 bg-white/[0.02]">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/80 animate-pulse" />
           <span className="text-xs text-white/40 tracking-widest uppercase">
-            {lang === "en" ? "Open for opportunities" : "开放合作"}
+            开放合作
           </span>
         </div>
         <h1 className="text-5xl md:text-6xl lg:text-[7rem] font-bold leading-[1.1] tracking-tight mt-16 flex flex-col items-center justify-center gap-4">
@@ -80,13 +80,12 @@ function Hero() {
               shineColor="#c084fc"
               spread={120}
             >
-              {lang === "en" ? t.hero.greetingXiuyi : "咻咿"}
+              咻咿
             </ShinyText>
             <RotatingText
               texts={rotatingTexts}
-              mainClassName="px-2 sm:px-2 md:px-3 bg-cyan-300/20 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400 overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg border border-cyan-400/30"
               rotationInterval={2000}
-              transition={{ type: "spring", damping: 30, stiffness: 400 }}
+              mainClassName="px-2 sm:px-2 md:px-3 bg-cyan-300/20 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400 py-0.5 sm:py-1 md:py-2 justify-center rounded-lg border border-cyan-400/30"
             />
           </div>
         </h1>
@@ -104,7 +103,7 @@ function Hero() {
             href="#projects"
             className="px-8 py-3 border border-white/20 text-white/70 hover:border-white/50 transition-all duration-300 text-sm tracking-wide"
           >
-            {lang === "en" ? "View Projects" : "查看项目"}
+            查看项目
           </a>
         </div>
       </div>
