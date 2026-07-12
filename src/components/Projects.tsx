@@ -18,7 +18,7 @@ function Projects() {
             sentence={t.projects.subtitle}
             separator=" "
             manualMode={false}
-            blurAmount={2}
+            blurAmount={3}
             borderColor="#c084fc"
             glowColor="rgba(192, 132, 252, 0.6)"
             animationDuration={0.6}

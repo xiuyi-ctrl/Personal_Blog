@@ -18,7 +18,7 @@ const TrueFocus = ({
   sentence = 'True Focus',
   separator = ' ',
   manualMode = false,
-  blurAmount = 2,
+  blurAmount = 3,
   borderColor = '#c084fc',
   glowColor = 'rgba(192, 132, 252, 0.6)',
   animationDuration = 0.6,
@@ -57,6 +57,17 @@ const TrueFocus = ({
       setShowAllClear(true);
     }
   }, [cycleCount, showAllClear]);
+
+  useEffect(() => {
+    if (showAllClear) {
+      const timer = setTimeout(() => {
+        setShowAllClear(false);
+        setCycleCount(0);
+        setCurrentIndex(0);
+      }, pauseBetweenAnimations * 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [showAllClear, pauseBetweenAnimations]);
 
   useEffect(() => {
     if (currentIndex === null || currentIndex === -1 || showAllClear) return;
