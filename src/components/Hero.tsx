@@ -63,7 +63,7 @@ function Hero() {
         <h1 className="text-5xl md:text-6xl lg:text-[7rem] font-bold leading-[1.1] tracking-tight mt-16 flex flex-col items-center justify-center gap-4">
           <div className="flex items-center justify-center gap-2">
             <ShinyText 
-              className="text-white/90 inline-block text-4xl md:text-5xl lg:text-6xl"
+              className="text-white/90"
               speed={3}
               color="#ffffff"
               shineColor="#c084fc"
@@ -82,22 +82,13 @@ function Hero() {
             >
               {lang === "en" ? t.hero.greetingXiuyi : "咻咿"}
             </ShinyText>
-            <ShinyText 
-              className="text-white/90 inline-block"
-              speed={3}
-              color="#ffffff"
-              shineColor="#c084fc"
-              spread={120}
-            >
-              {t.hero.highlight}
-            </ShinyText>
+            <RotatingText
+              texts={rotatingTexts}
+              mainClassName="px-2 sm:px-2 md:px-3 bg-cyan-300/20 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400 overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg border border-cyan-400/30"
+              rotationInterval={2000}
+              transition={{ type: "spring", damping: 30, stiffness: 400 }}
+            />
           </div>
-          <RotatingText
-            texts={rotatingTexts}
-            mainClassName="px-2 sm:px-2 md:px-3 bg-cyan-300/20 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400 overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg border border-cyan-400/30"
-            rotationInterval={2000}
-            transition={{ type: "spring", damping: 30, stiffness: 400 }}
-          />
         </h1>
         <p className="mt-6 text-base text-white/40 max-w-xl mx-auto leading-relaxed tracking-wide">
           {t.hero.subtitle}
