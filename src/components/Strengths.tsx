@@ -2,6 +2,8 @@ import type { ReactNode } from "react";
 import { useLanguage } from "../i18n/LanguageContext";
 import Particles from "./Particles";
 import TrueFocus from "./TrueFocus";
+import SpotlightCard from "./SpotlightCard";
+import "./SpotlightCard.css";
 
 const iconMap: Record<string, ReactNode> = {
   code: (
@@ -60,15 +62,13 @@ function Strengths() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {t.strengths.items.map((item) => (
-            <div key={item.title} className="group p-8 border border-white/[0.04] bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-500">
-              <div className="w-10 h-10 flex items-center justify-center border border-white/[0.06] text-white/60 mb-6">
-                {iconMap[item.icon] || null}
-              </div>
-              <h3 className="text-lg font-semibold text-white/90">{item.title}</h3>
-              <p className="text-sm text-white/40 mt-3 leading-relaxed">
-                {item.description}
-              </p>
-            </div>
+            <SpotlightCard
+              key={item.title}
+              title={item.title}
+              description={item.description}
+              icon={iconMap[item.icon] || null}
+              className="group"
+            />
           ))}
         </div>
       </div>
