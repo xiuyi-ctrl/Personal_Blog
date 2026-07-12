@@ -1,6 +1,7 @@
 import { useLanguage } from "../i18n/LanguageContext";
 import Hyperspeed from "./Hyperspeed";
 import ShinyText from "./ShinyText";
+import RotatingText from "./RotatingText";
 
 const hyperspeedOptions: any = {
   distortion: "turbulentDistortion",
@@ -38,6 +39,11 @@ const hyperspeedOptions: any = {
   },
 };
 
+const rotatingTexts = [
+  "个人作品集",
+  "Vibe Coding"
+];;
+
 function Hero() {
   const { t, lang } = useLanguage();
 
@@ -54,7 +60,7 @@ function Hero() {
             {lang === "en" ? "Open for opportunities" : "开放合作"}
           </span>
         </div>
-        <h1 className="text-5xl md:text-6xl lg:text-[7rem] font-bold leading-[1.1] tracking-tight mt-16">
+        <h1 className="text-5xl md:text-6xl lg:text-[7rem] font-bold leading-[1.1] tracking-tight mt-16 flex items-center justify-center gap-4">
           <ShinyText 
             className="text-white/90"
             speed={3}
@@ -64,10 +70,13 @@ function Hero() {
           >
             {t.hero.greeting}
           </ShinyText>
-          <br />
-          <span className="bg-gradient-to-r from-white via-white/80 to-white/40 bg-clip-text text-transparent">
-            {t.hero.highlight}
-          </span>
+          <RotatingText
+            texts={rotatingTexts}
+            mainClassName="px-2 sm:px-2 md:px-3 bg-cyan-300/20 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400 overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg border border-cyan-400/30"
+            splitBy="words"
+            transition={{ type: "spring", damping: 30, stiffness: 400 }}
+            rotationInterval={2000}
+          />
         </h1>
         <p className="mt-6 text-base text-white/40 max-w-xl mx-auto leading-relaxed tracking-wide">
           {t.hero.subtitle}
