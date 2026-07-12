@@ -1,6 +1,7 @@
 import { projects } from "../data/projects";
 import { useLanguage } from "../i18n/LanguageContext";
 import Particles from "./Particles";
+import TrueFocus from "./TrueFocus";
 
 function Projects() {
   const { t } = useLanguage();
@@ -13,9 +14,16 @@ function Projects() {
           <span className="text-xs text-white/30 tracking-[0.3em] uppercase">
             {t.projects.title}
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold mt-4 text-white/90">
-            {t.projects.subtitle}
-          </h2>
+          <TrueFocus
+            sentence={t.projects.subtitle}
+            separator=" "
+            manualMode={false}
+            blurAmount={8}
+            borderColor="#c084fc"
+            glowColor="rgba(192, 132, 252, 0.6)"
+            animationDuration={0.6}
+            pauseBetweenAnimations={1.5}
+          />
         </div>
 
         <div className="space-y-12">
