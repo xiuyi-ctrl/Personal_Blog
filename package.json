@@ -16,7 +16,6 @@
     "vite": "^8.1.1"
   },
   "dependencies": {
-    "@rolldown/binding-win32-x64-msvc": "^1.1.5",
     "@tailwindcss/vite": "^4.3.2",
     "framer-motion": "^11.11.5",
     "ogl": "^1.0.11",
@@ -25,5 +24,12 @@
     "react-dom": "^19.2.7",
     "tailwindcss": "^4.3.2",
     "three": "^0.185.1"
+  },
+  "optionalDependencies": {
+    "@rolldown/binding-darwin-arm64": "^1.1.5",
+    "@rolldown/binding-darwin-x64": "^1.1.5",
+    "@rolldown/binding-linux-x64-gnu": "^1.1.5",
+    "@rolldown/binding-linux-x64-musl": "^1.1.5",
+    "@rolldown/binding-win32-x64-msvc": "^1.1.5"
   }
 }
