@@ -24,16 +24,12 @@ React 19 + TypeScript 6 + Vite 8 + Tailwind CSS v4
 - **Max-width**: 1700px for PC layout
 - **Theme**: Dark (#0a0a0a bg), white text, subtle borders
 
-## Key quirks
-- **Tailwind v4**: Use `@import "tailwindcss"` in CSS (not `@tailwind` directives). Plugin is `@tailwindcss/vite` in `vite.config.ts`.
-- **TypeScript 6**: `verbatimModuleSyntax` → `import type` for type-only imports. `noUnusedLocals`/`noUnusedParameters` are strict.
-- **Windows**: Vite 8 uses rolldown; `@rolldown/binding-win32-x64-msvc` must be in dependencies for Windows builds.
-- **Node**: Requires 20.19+ or 22.12+. Current 22.2.0 works with warnings.
-- **No router**: Single-page scroll sections with anchor links (`#hero`, `#experience`, `#projects`, `#strengths`, `#contact`).
-- **No external i18n lib**: Custom React Context (`LanguageProvider` + `useLanguage()`).
-- **Max-width**: 1700px for PC layout.
+## Static assets
+- **Public directory**: Place static files (SVG, images) in `public/` for direct access
+- **Import pattern**: Use `src="/filename.svg"` for files in `public/`
+- **Avoid**: Do not place static assets in `src/assets/` unless importing via JS modules
 
-## Commands
-- `npm run dev` — start Vite dev server
-- `npm run build` — typecheck + production build (`tsc && vite build`)
-- `npm run preview` — preview production build
+## Deployment
+- **Vercel**: Auto-deploys from GitHub main branch
+- **Build**: `tsc && vite build`
+- **Node**: 22.2.0 (works with warnings)

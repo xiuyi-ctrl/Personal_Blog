@@ -2,14 +2,22 @@ import { useLanguage } from "../i18n/LanguageContext";
 import Particles from "./Particles";
 import LogoLoop from "./LogoLoop";
 
+const showCopiedToast = () => {
+  const msg = document.createElement('div');
+  msg.textContent = '邮箱已复制';
+  msg.style.cssText = 'position:fixed;left:50%;transform:translateX(-50%);bottom:20px;padding:8px 16px;background:rgba(192,132,252,0.9);color:white;border-radius:4px;font-size:14px;z-index:9999;opacity:0;transition:opacity 0.3s ease';
+  document.body.appendChild(msg);
+  requestAnimationFrame(() => { msg.style.opacity = '1'; });
+  setTimeout(() => {
+    msg.style.opacity = '0';
+    setTimeout(() => document.body.removeChild(msg), 300);
+  }, 2000);
+};
+
 const footerLogos = [
   {
     node: (
-      <img
-        src="/github.svg"
-        alt="GitHub"
-        style={{ width: '24px', height: '24px', display: 'block' }}
-      />
+      <img src="/github.svg" alt="GitHub" style={{ width: 24, height: 24, display: 'block' }} />
     ),
     title: 'GitHub',
     href: 'https://github.com/xiuyi-ctrl',
@@ -20,39 +28,22 @@ const footerLogos = [
         onClick={(e) => {
           e.preventDefault();
           navigator.clipboard.writeText('2998526825@qq.com');
-          const msg = document.createElement('div');
-          msg.className = 'copy-feedback';
-          msg.textContent = 'Email address copied!';
-          msg.style.position = 'fixed';
-          msg.style.left = '50%';
-          msg.style.transform = 'translateX(-50%)';
-          msg.style.bottom = '20px';
-          msg.style.padding = '8px 16px';
-          msg.style.background = 'rgba(192, 132, 252, 0.9)';
-          msg.style.color = 'white';
-          msg.style.borderRadius = '4px';
-          msg.style.fontSize = '14px';
-          msg.style.zIndex = '9999';
-          msg.style.opacity = '0';
-          msg.style.transition = 'opacity 0.3s ease';
-          document.body.appendChild(msg);
-          setTimeout(() => msg.style.opacity = '1', 10);
-          setTimeout(() => {
-            msg.style.opacity = '0';
-            setTimeout(() => document.body.removeChild(msg), 300);
-          }, 2000);
+          showCopiedToast();
         }}
-        style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '24px', height: '24px' }}
+        style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', width: 24, height: 24 }}
       >
-        <img
-          src="/react.svg"
-          alt="React"
-          style={{ width: '24px', height: '24px', display: 'block' }}
-        />
+        <img src="/email.svg" alt="Email" style={{ width: 24, height: 24, display: 'block' }} />
       </div>
     ),
-    title: 'React',
+    title: 'Email',
     href: '#',
+  },
+  {
+    node: (
+      <img src="/react.svg" alt="React Bits" style={{ width: 24, height: 24, display: 'block' }} />
+    ),
+    title: 'React Bits',
+    href: 'https://www.reactbits.dev/',
   },
 ];
 
