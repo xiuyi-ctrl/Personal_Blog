@@ -1,4 +1,4 @@
-# Personal Blog — Agent Guide
+# xiuyi_Portfolio — Agent Guide
 
 ## Commands
 - `npm run dev` — start Vite dev server
